@@ -1041,9 +1041,51 @@
 section {
   scroll-margin-top: 80px; /* Same value as your navbar height */
 }
+   /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2193b0, #6dd5ed);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(33, 147, 176, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top:hover {
+            background: linear-gradient(135deg, #1a7a94, #5bc0de);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(33, 147, 176, 0.6);
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:active {
+            transform: scale(0.95);
+        }  
   </style>
 </head>
 <body>
+    <button class="scroll-to-top" id="scrollToTop">
+        ↑
+    </button>
   <!-- Floating background squares -->
   <div class="background">
     <div class="square" style="left:10%; animation-duration: 12s; animation-delay: 0s;"></div>
@@ -1451,6 +1493,27 @@ section {
         background.appendChild(square);
       }
     });
+  // Get the button
+        const scrollToTopBtn = document.getElementById("scrollToTop");
+        
+        // Show the button when user scrolls down 300px from the top
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollToTopBtn.classList.add("show");
+            } else {
+                scrollToTopBtn.classList.remove("show");
+            }
+        };
+        
+        // Scroll to top when button is clicked
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+    
   </script>
 </body>
 </html>
